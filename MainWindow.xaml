@@ -1,0 +1,49 @@
+﻿<Window x:Class="FIRST.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:sys ="clr-namespace:System;assembly=mscorlib"
+        Title="MainWindow" Height="350" Width="525" Name="Main">
+
+    <Window.Resources>
+
+        <Storyboard x:Key="ItemAnimation" >
+            <DoubleAnimation From="1.0" To="0.0" Duration="0:0:0.5" Storyboard.TargetProperty="Scale" Storyboard.TargetName="Main" />
+            <DoubleAnimation From="0.0" To="1.0" Duration="0:0:0.5" BeginTime="0:0:0.5" Storyboard.TargetProperty="Scale" Storyboard.TargetName="Main"/>
+            <DoubleAnimation From="1.0" To="0.0" Duration="0:0:0.5" Storyboard.TargetProperty="Fade" Storyboard.TargetName="Main"/>
+            <DoubleAnimation From="0.0" To="1.0" Duration="0:0:0.5" BeginTime="0:0:0.5" Storyboard.TargetProperty="Fade" Storyboard.TargetName="Main"/>
+        </Storyboard>
+    </Window.Resources>
+
+    <Grid>
+        <Menu>
+            <MenuItem Header="Events">
+                <MenuItem Header="Load Event List"/>
+                <MenuItem Header="Select Event"/>
+            </MenuItem>
+            <MenuItem Header="Teams">
+                <MenuItem Header="Team Scraper"/>
+            </MenuItem>
+        </Menu>
+
+        <DataGrid Name="Tester" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}">
+                    
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+            <DataGrid.ItemContainerStyle>
+                <Style TargetType="DataGridRow">
+                    <Style.Setters>
+                        <Setter Property="RenderTransform">
+                            <Setter.Value>
+                                <ScaleTransform ScaleY="{Binding ElementName=Main, Path=Scale}"></ScaleTransform>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="Opacity" Value="{Binding ElementName=Main, Path=Fade}"/>
+                    </Style.Setters>
+                </Style>
+            </DataGrid.ItemContainerStyle>
+        </DataGrid>
+        
+    </Grid>
+</Window>

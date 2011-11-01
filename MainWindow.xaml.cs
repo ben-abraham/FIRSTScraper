@@ -65,17 +65,24 @@ namespace FIRST
             Tester.Items.Add(new Test { Name = "BEN3" });
             Tester.Items.Add(new Test { Name = "BEN4" });
 
+
             DispatcherTimer t = new DispatcherTimer() { Interval = new TimeSpan(0,0,0,2) };
             t.Tick += new EventHandler(t_Tick);
             t.Start();
 
-            EventPage p = new EventPage("http://www2.usfirst.org/2011comp/events/WOR/matchresults.html");
+            //EventPage p = new EventPage("http://www2.usfirst.org/2011comp/events/WOR/matchresults.html");
         }
 
         void t_Tick(object sender, EventArgs e)
         {
             var t = FindResource("ItemAnimation");
             (t as Storyboard).Begin();
+            
+        }
+
+        private void Main_Loaded(object sender, RoutedEventArgs e)
+        {
+            new EventLoader(2010);
         }
     }
 }

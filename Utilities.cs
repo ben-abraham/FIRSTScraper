@@ -28,6 +28,17 @@ namespace FIRST
                 }
             }
         }
+        public static HtmlNode FirstChildWithClass(this HtmlNode parent, string Class)
+        {
+            foreach (HtmlNode child in parent.ChildNodes)
+            {
+                if (child.Name.ToLower() == Class.ToLower())
+                {
+                    return child;
+                }
+            }
+            return null;
+        }
         public static bool EqualsAttributes(this HtmlAttributeCollection collection, HtmlAttributeCollection second)
         {
             if(collection.Count != second.Count)

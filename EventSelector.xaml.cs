@@ -21,13 +21,31 @@ namespace FIRST
     {
         EventLoader selector;
 
-        public Event selectedEvent;
+        public Event SelectedEvent;
 
+        private Task eventLoader;
+      
         public EventSelector()
         {
             InitializeComponent();
+            
             selector = new EventLoader();
             EventYear.Text = ""+DateTime.Now.Year;
+            IsVisibleChanged += (sender, ev) =>
+            {
+                if (Visibility == Visibility.Visible)
+                    BeginRequestEvents(DateTime.Now.Year);
+            };
+        }
+
+        private void BeginRequestEvents(int year)
+        {
+            if (eventLoader == null || eventLoader.Status != TaskStatus.Running)
+            {
+                eventLoader = new Task(() => selector.GetEvents(year));
+                eventLoader.ContinueWith(UpdateEventBox, TaskScheduler.FromCurrentSynchronizationContext());
+                eventLoader.Start();
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs ev)
@@ -35,24 +53,20 @@ namespace FIRST
             int year;
             if (int.TryParse(EventYear.Text, out year))
             {
-                Task t = new Task(() => 
-                {
-                    selector.GetEvents(year);
-
-                    EventsBox.Dispatcher.Invoke((Action)(() =>
-                        {
-                            EventsBox.Items.Clear();
-                            foreach (Event e in selector.events)
-                            {
-                                EventsBox.Items.Add(e);
-                            }
-                            EventsBox.SelectedIndex = 0;
-                        }));
-                    Mouse.SetCursor(Cursors.ArrowCD);
-                });
-                t.Start();
-                Mouse.SetCursor(Cursors.AppStarting);
+                Mouse.SetCursor(Cursors.ArrowCD);
+        
             }
+        }
+
+        private void UpdateEventBox(Task page)
+        {
+            EventsBox.Items.Clear();
+            foreach (Event e in selector.events)
+            {
+                EventsBox.Items.Add(e);
+            }
+            EventsBox.SelectedIndex = 0;
+            Mouse.SetCursor(Cursors.ArrowCD);
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
@@ -64,7 +78,8 @@ namespace FIRST
         {
             if (EventsBox.SelectedItem != null)
             {
-                selectedEvent = EventsBox.SelectedItem as Event;
+                SelectedEvent = EventsBox.SelectedItem as Event;
+                
                 DialogResult = true;
             }
             else

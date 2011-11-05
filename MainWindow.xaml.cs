@@ -58,17 +58,19 @@ namespace FIRST
 
         public MainWindow()
         {
+
+           
             Scale = 1.0;
             Fade = 1.0;
-
+            
             InitializeComponent();
-
+            System.Net.WebRequest.Create("https://my.usfirst.org/myarea/index.lasso");
             Tester.Items.Add(new Test { Name = "BEN1" });
             Tester.Items.Add(new Test { Name = "BEN2" });
             Tester.Items.Add(new Test { Name = "BEN3" });
             Tester.Items.Add(new Test { Name = "BEN4" });
 
-            new EventPage("http://www2.usfirst.org/2011comp/events/SDC/matchresults.html");
+            //new EventPage("http://www2.usfirst.org/2011comp/events/SDC/matchresults.html");
         }
 
         void Animate()
@@ -86,7 +88,7 @@ namespace FIRST
             bool? result = selector.ShowDialog();
             if (result.Value)
             {
-                selectedEvent = selector.selectedEvent;
+                selectedEvent = selector.SelectedEvent;
             }
             else
             {

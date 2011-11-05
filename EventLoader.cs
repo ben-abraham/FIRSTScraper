@@ -27,15 +27,20 @@ namespace FIRST
         public void GetEvents(int year)
         {
             string responseFromServer = "";
-            WebRequest request = WebRequest.Create(LassoLocation + "?omit_searchform=1");
+            HttpWebRequest request = WebRequest.Create(LassoLocation + "?omit_searchform=1") as HttpWebRequest;
+            request.KeepAlive = false;
+         
+            request.Proxy = null;
+//request.AllowWriteStreamBuffering = false;
+  //          request.Pipelined = true;
+
             request.Method = "POST";
             string postData = "page=searchresults&skip_events=0&skip_teams=1&programs=FRC&season_FRC=" + year.ToString() + "&reports=events&area=ALL&results_size=250";
             byte[] byteArray = Encoding.UTF8.GetBytes(postData);
             request.ContentType = "application/x-www-form-urlencoded";
             request.ContentLength = byteArray.Length;
-
-            using (Stream dataStream = request.GetRequestStream())
-            {
+          
+            Stream dataStream = request.GetRequestStream();
                 dataStream.Write(byteArray, 0, byteArray.Length);
                 dataStream.Close();
                 using (WebResponse response = request.GetResponse())
@@ -44,11 +49,12 @@ namespace FIRST
                     using (StreamReader reader = new StreamReader(response.GetResponseStream()))
                     {
                         responseFromServer = reader.ReadToEnd();
+                       
                     }
                 }
-            }
-
+           
             HtmlDocument doc = new HtmlDocument();
+            
             doc.LoadHtml(responseFromServer);
             HtmlNode node = doc.DocumentNode;
 

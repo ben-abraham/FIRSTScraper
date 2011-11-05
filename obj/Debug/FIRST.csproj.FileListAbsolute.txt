@@ -44,3 +44,19 @@ C:\Users\BenAbraham\Documents\Visual Studio 11\Projects\FIRST\obj\Debug\FIRST.Pr
 C:\Users\BenAbraham\Documents\Visual Studio 11\Projects\FIRST\obj\Debug\FIRST.csproj.GenerateResource.Cache
 C:\Users\BenAbraham\documents\visual studio 11\Projects\FIRST\obj\Debug\EventSelector.baml
 C:\Users\BenAbraham\documents\visual studio 11\Projects\FIRST\obj\Debug\EventSelector.g.cs
+C:\GitRepositorys\FirstScrapper\obj\Debug\FIRST.exe
+C:\GitRepositorys\FirstScrapper\obj\Debug\FIRST.pdb
+C:\GitRepositorys\FirstScrapper\bin\Debug\FIRST.exe
+C:\GitRepositorys\FirstScrapper\bin\Debug\FIRST.pdb
+C:\GitRepositorys\FirstScrapper\bin\Debug\HtmlAgilityPack.dll
+C:\GitRepositorys\FirstScrapper\obj\Debug\FIRST.csprojResolveAssemblyReference.cache
+C:\GitRepositorys\FirstScrapper\obj\Debug\EventSelector.baml
+C:\GitRepositorys\FirstScrapper\obj\Debug\MainWindow.baml
+C:\GitRepositorys\FirstScrapper\obj\Debug\EventSelector.g.cs
+C:\GitRepositorys\FirstScrapper\obj\Debug\MainWindow.g.cs
+C:\GitRepositorys\FirstScrapper\obj\Debug\App.g.cs
+C:\GitRepositorys\FirstScrapper\obj\Debug\FIRST_Content.g.cs
+C:\GitRepositorys\FirstScrapper\obj\Debug\FIRST_MarkupCompile.cache
+C:\GitRepositorys\FirstScrapper\obj\Debug\FIRST.g.resources
+C:\GitRepositorys\FirstScrapper\obj\Debug\FIRST.Properties.Resources.resources
+C:\GitRepositorys\FirstScrapper\obj\Debug\FIRST.csproj.GenerateResource.Cache

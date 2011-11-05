@@ -15,9 +15,16 @@ namespace FIRST
                                                     "MI FRC State Championship",
                                                     "MI District"};
 
-        string LassoLocation = "https://my.usfirst.org/myarea/index.lasso";
+        public static string LassoLocation = "https://my.usfirst.org/myarea/index.lasso";
 
-        public EventLoader(int year)
+        public List<Event> events;
+
+        public EventLoader()
+        {
+            events = new List<Event>();
+        }
+
+        public void GetEvents(int year)
         {
             string responseFromServer = "";
             WebRequest request = WebRequest.Create(LassoLocation + "?omit_searchform=1");
@@ -45,7 +52,7 @@ namespace FIRST
             doc.LoadHtml(responseFromServer);
             HtmlNode node = doc.DocumentNode;
 
-            List<Event> events = new List<Event>();
+            events = new List<Event>();
             foreach (HtmlNode row in node.GetNodesByClass("tr"))
             {
                 HtmlNode temp = row.FirstChildWithClass("td");
@@ -64,22 +71,24 @@ namespace FIRST
                         e.Add("Link", link);
                         e.Add("Event Venue", descriptions[2].InnerText);
                         e.Add("Location", descriptions[3].InnerText);
-                        e.Add("Date", descriptions[4].InnerText);
+                        e.Add("Date", descriptions[4].InnerText.Trim());
                         events.Add(e);
                     }
                 }
             }
-            
-
-            File.WriteAllText("output.html", responseFromServer);
         }
-
     }
 
-    class Event : Dictionary<string, string>
+    public class Event : Dictionary<string, string>
     {
         public string Name { get { return this["Name"]; } }
         public string Venue { get { return this["Event Venue"]; } }
         public string Location { get { return this["Location"]; } }
+        public string Date { get { return this["Date"]; } }
+
+        public void LoadEventDetails()
+        {
+
+        }
     }
 }

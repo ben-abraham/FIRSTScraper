@@ -57,7 +57,13 @@
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
     <Compile Include="EventLoader.cs" />
+    <Compile Include="EventSelector.xaml.cs">
+      <DependentUpon>EventSelector.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Utilities.cs" />
+    <Page Include="EventSelector.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

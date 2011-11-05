@@ -1,0 +1,33 @@
+﻿<Window x:Class="FIRST.EventSelector"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="EventSelector" Height="190" Width="300" ResizeMode="NoResize" >
+    <Grid>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <Label Content="Select A Year And An Event"/>
+        <Label Content="Year:" Grid.Row="1"/>
+        <TextBox Grid.Row="2" Name="EventYear"/>
+        <Label Content="Event" Grid.Row="3"/>
+        <ComboBox Name="EventsBox" Grid.Row="4" Margin="0,0,50,0">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Width="500">
+                        <Label Content="{Binding Name}"/>
+                        <Label Content="{Binding Date}" TextBlock.Foreground="Red" HorizontalAlignment="Right"/>
+                    </Grid>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <Button Content="Reload" Grid.Row="4" HorizontalAlignment="Right" Click="Button_Click"/>
+        <Button Content="Cancel" Grid.Row="5" HorizontalAlignment="Left" Width="80" Margin="10,5,10,5" Click="Cancel_Click"/>
+        <Button Content="Select" Grid.Row="5" Margin="204,5,10,5" Click="Select_Click"/>
+    </Grid>
+</Window>

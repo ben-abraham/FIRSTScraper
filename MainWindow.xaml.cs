@@ -18,10 +18,6 @@ using HtmlAgilityPack;
 
 namespace FIRST
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    /// 
 
     public class Test : INotifyPropertyChanged
     {
@@ -49,6 +45,8 @@ namespace FIRST
 
     public partial class MainWindow : Window
     {
+        Event selectedEvent;
+
 
         public static readonly DependencyProperty scale_prop = DependencyProperty.Register("Scale", typeof(double), typeof(MainWindow));
         public static readonly DependencyProperty fade_prop = DependencyProperty.Register("Fade", typeof(double), typeof(MainWindow));
@@ -56,8 +54,13 @@ namespace FIRST
         public double Scale { get { return (double)GetValue(scale_prop); } set { SetValue(scale_prop, value); } }
         public double Fade { get { return (double)GetValue(fade_prop); } set { SetValue(fade_prop, value); } }
 
+
+
         public MainWindow()
         {
+            Scale = 1.0;
+            Fade = 1.0;
+
             InitializeComponent();
 
             Tester.Items.Add(new Test { Name = "BEN1" });
@@ -65,24 +68,30 @@ namespace FIRST
             Tester.Items.Add(new Test { Name = "BEN3" });
             Tester.Items.Add(new Test { Name = "BEN4" });
 
-
-            DispatcherTimer t = new DispatcherTimer() { Interval = new TimeSpan(0,0,0,2) };
-            t.Tick += new EventHandler(t_Tick);
-            t.Start();
-
-            //EventPage p = new EventPage("http://www2.usfirst.org/2011comp/events/WOR/matchresults.html");
+            new EventPage("http://www2.usfirst.org/2011comp/events/SDC/matchresults.html");
         }
 
-        void t_Tick(object sender, EventArgs e)
+        void Animate()
         {
-            var t = FindResource("ItemAnimation");
-            (t as Storyboard).Begin();
-            
+            (FindResource("ItemAnimation") as Storyboard).Begin();
         }
 
         private void Main_Loaded(object sender, RoutedEventArgs e)
         {
-            new EventLoader(2010);
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            EventSelector selector = new EventSelector();
+            bool? result = selector.ShowDialog();
+            if (result.Value)
+            {
+                selectedEvent = selector.selectedEvent;
+            }
+            else
+            {
+
+            }
         }
     }
 }

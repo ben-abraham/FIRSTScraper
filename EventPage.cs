@@ -16,10 +16,12 @@ namespace FIRST
             string html = cli.DownloadString(url);
             HtmlDocument d = new HtmlDocument();
             d.LoadHtml(html);
-            HtmlNode table = d.DocumentNode.GetNodesByClass("table").First();
-            List<HtmlNode> nodes = table.GetNodesByClass("TR").ToList();
-            HtmlNode TemplateRow = nodes.Last();
-            Console.WriteLine(TemplateRow.OuterHtml);
+            List<HtmlNode> tables = d.DocumentNode.GetNodesByClass("table").ToList();
+            foreach (HtmlNode table in tables)
+            {
+                List<HtmlNode> nodes = table.GetNodesByClass("TR").ToList();
+                Console.WriteLine("Table Found with {0} rows", nodes.Count);
+            }
         }
     }
 }

@@ -42,3 +42,5 @@ C:\Users\BenAbraham\Documents\Visual Studio 11\Projects\FIRST\obj\Debug\FIRST_Ma
 C:\Users\BenAbraham\Documents\Visual Studio 11\Projects\FIRST\obj\Debug\FIRST.g.resources
 C:\Users\BenAbraham\Documents\Visual Studio 11\Projects\FIRST\obj\Debug\FIRST.Properties.Resources.resources
 C:\Users\BenAbraham\Documents\Visual Studio 11\Projects\FIRST\obj\Debug\FIRST.csproj.GenerateResource.Cache
+C:\Users\BenAbraham\documents\visual studio 11\Projects\FIRST\obj\Debug\EventSelector.baml
+C:\Users\BenAbraham\documents\visual studio 11\Projects\FIRST\obj\Debug\EventSelector.g.cs

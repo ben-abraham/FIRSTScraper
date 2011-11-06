@@ -16,6 +16,8 @@ namespace FIRST
             string html = cli.DownloadString(url);
             HtmlDocument d = new HtmlDocument();
             d.LoadHtml(html);
+
+     
             List<HtmlNode> tables = d.DocumentNode.GetNodesByClass("table").ToList();
             foreach (HtmlNode table in tables)
             {

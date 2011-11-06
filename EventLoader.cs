@@ -36,22 +36,15 @@ namespace FIRST
 
             request.Method = "POST";
             string postData = "page=searchresults&skip_events=0&skip_teams=1&programs=FRC&season_FRC=" + year.ToString() + "&reports=events&area=ALL&results_size=250";
-            byte[] byteArray = Encoding.UTF8.GetBytes(postData);
+            byte[] byteArray = Encoding.Default.GetBytes(postData);
             request.ContentType = "application/x-www-form-urlencoded";
             request.ContentLength = byteArray.Length;
-          
-            Stream dataStream = request.GetRequestStream();
+
+            using (Stream dataStream = request.GetRequestStream())
                 dataStream.Write(byteArray, 0, byteArray.Length);
-                dataStream.Close();
-                using (WebResponse response = request.GetResponse())
-                {
-                    Console.WriteLine(((HttpWebResponse)response).StatusDescription);
-                    using (StreamReader reader = new StreamReader(response.GetResponseStream()))
-                    {
-                        responseFromServer = reader.ReadToEnd();
-                       
-                    }
-                }
+            using (WebResponse response = request.GetResponse())
+                using (StreamReader reader = new StreamReader(response.GetResponseStream()))
+                    responseFromServer = reader.ReadToEnd();
            
             HtmlDocument doc = new HtmlDocument();
             

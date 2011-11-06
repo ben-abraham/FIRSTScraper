@@ -14,8 +14,9 @@
         
         <Label Content="Select A Year And An Event"/>
         <StackPanel Grid.Row="1">
-            <Label Content="Year:" />
-            <TextBox Grid.Row="2" Name="EventYear"/>
+            <!--<Label Content="Year:" /> Gone for now-->
+            <TextBox Name="EventYear" Template="{StaticResource WatermarkedTextBox}"
+                     HorizontalContentAlignment="Left" Text="" Tag="Enter Year"/>
         </StackPanel>
         <Label Content="Event" Grid.Row="2"/>
         <DockPanel Grid.Row="3">

@@ -53,7 +53,7 @@ namespace FIRST
             int year;
             if (int.TryParse(EventYear.Text, out year))
             {
-                Mouse.SetCursor(Cursors.ArrowCD);
+                Mouse.SetCursor(Cursors.AppStarting);
         
             }
         }
@@ -66,7 +66,7 @@ namespace FIRST
                 EventsBox.Items.Add(e);
             }
             EventsBox.SelectedIndex = 0;
-            Mouse.SetCursor(Cursors.ArrowCD);
+            Mouse.SetCursor(Cursors.AppStarting);
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
@@ -79,7 +79,6 @@ namespace FIRST
             if (EventsBox.SelectedItem != null)
             {
                 SelectedEvent = EventsBox.SelectedItem as Event;
-                
                 DialogResult = true;
             }
             else

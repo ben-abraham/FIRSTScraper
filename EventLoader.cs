@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Net;
@@ -18,33 +19,31 @@ namespace FIRST
         public static string LassoLocation = "https://my.usfirst.org/myarea/index.lasso";
 
         public List<Event> events;
+        private WebClient client;
+        private NameValueCollection values;
 
         public EventLoader()
         {
             events = new List<Event>();
+            client = new WebClient();
+
+            values = new NameValueCollection();
+            values.Add("page", "searchresults");
+            values.Add("skip_events", "0");
+            values.Add("skip_teams", "1");
+            values.Add("programs", "FRC");
+            values.Add("season_FRC", "2011");
+            values.Add("reports", "events");
+            values.Add("area", "ALL");
+            values.Add("results_size", "250");
+
+            
         }
 
         public void GetEvents(int year)
         {
             string responseFromServer = "";
-            HttpWebRequest request = WebRequest.Create(LassoLocation + "?omit_searchform=1") as HttpWebRequest;
-            request.KeepAlive = false;
-         
-            request.Proxy = null;
-//request.AllowWriteStreamBuffering = false;
-  //          request.Pipelined = true;
-
-            request.Method = "POST";
-            string postData = "page=searchresults&skip_events=0&skip_teams=1&programs=FRC&season_FRC=" + year.ToString() + "&reports=events&area=ALL&results_size=250";
-            byte[] byteArray = Encoding.Default.GetBytes(postData);
-            request.ContentType = "application/x-www-form-urlencoded";
-            request.ContentLength = byteArray.Length;
-
-            using (Stream dataStream = request.GetRequestStream())
-                dataStream.Write(byteArray, 0, byteArray.Length);
-            using (WebResponse response = request.GetResponse())
-                using (StreamReader reader = new StreamReader(response.GetResponseStream()))
-                    responseFromServer = reader.ReadToEnd();
+            responseFromServer = Encoding.ASCII.GetString(client.UploadValues(LassoLocation, values));
            
             HtmlDocument doc = new HtmlDocument();
             

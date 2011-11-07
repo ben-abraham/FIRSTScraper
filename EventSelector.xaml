@@ -1,7 +1,7 @@
 ﻿<Window x:Class="FIRST.EventSelector"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Select Event" Height="220" Width="300" MinHeight="220"  >
+        Title="Select Event" Height="270" Width="380" MinHeight="220"  >
     <Grid Margin="5">      
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -21,12 +21,16 @@
         <Label Content="Event" Grid.Row="2"/>
         <DockPanel Grid.Row="3">
             <Button Content="Reload" DockPanel.Dock="Right" Click="Button_Click"/>
-            <ComboBox Name="EventsBox" Margin="0,0,50,0" MinHeight="30">
+            <ComboBox Name="EventsBox" Margin="0,0,50,0" MinHeight="30" HorizontalContentAlignment="Stretch">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
-                        <Grid Width="500">
-                            <Label Content="{Binding Name}"/>
-                            <Label Content="{Binding Date}" TextBlock.Foreground="Red" HorizontalAlignment="Right"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="{Binding Date}" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" TextBlock.Foreground="Red" />
+                            <TextBlock Text="{Binding Name}"  TextTrimming="WordEllipsis" VerticalAlignment="Center" />
                         </Grid>
                     </DataTemplate>
                 </ComboBox.ItemTemplate>

@@ -30,7 +30,7 @@ namespace FIRST
             InitializeComponent();
             
             selector = new EventLoader();
-            EventYear.Text = ""+DateTime.Now.Year;
+            //EventYear.Text = ""+DateTime.Now.Year; //temporarly turned of to feature watermark
             IsVisibleChanged += (sender, ev) =>
             {
                 if (Visibility == Visibility.Visible)

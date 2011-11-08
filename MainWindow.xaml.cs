@@ -54,7 +54,7 @@ namespace FIRST
         public double Scale { get { return (double)GetValue(scale_prop); } set { SetValue(scale_prop, value); } }
         public double Fade { get { return (double)GetValue(fade_prop); } set { SetValue(fade_prop, value); } }
 
-
+        EventSelector selector = new EventSelector();
 
         public MainWindow()
         {
@@ -84,11 +84,11 @@ namespace FIRST
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            EventSelector selector = new EventSelector();
             bool? result = selector.ShowDialog();
             if (result.Value)
             {
                 selectedEvent = selector.SelectedEvent;
+                selectedEvent.LoadEventDetails();
             }
             else
             {

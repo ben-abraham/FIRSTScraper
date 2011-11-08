@@ -57,6 +57,7 @@
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Compile Include="Event.cs" />
     <Compile Include="EventLoader.cs" />
     <Compile Include="EventSelector.xaml.cs">
       <DependentUpon>EventSelector.xaml</DependentUpon>

@@ -24,28 +24,44 @@ namespace FIRST
         public Event SelectedEvent;
 
         private Task eventLoader;
-      
+
         public EventSelector()
         {
             InitializeComponent();
-            
+
             selector = new EventLoader();
-            EventYear.Text = ""+DateTime.Now.Year;
+            EventYear.Text = "" + DateTime.Now.Year;
+
+            selector.DownloadProgressChanged += (sender, e) =>
+            {
+                DownloadProgress.Dispatcher.Invoke(new Action(() =>
+                {
+                    DownloadProgress.Value = (e.ProgressPercentage - 50) * 2;
+                }));
+            };
+
             IsVisibleChanged += (sender, ev) =>
             {
                 if (Visibility == Visibility.Visible)
                     BeginRequestEvents(DateTime.Now.Year);
             };
+            selector.EventsUpdated += (sender, e) =>
+            {
+                if (Visibility == Visibility.Visible)
+                {
+                    SetProgressVisibility(System.Windows.Visibility.Hidden);
+                    EventsBox.Dispatcher.Invoke(new Action(() =>
+                    {
+                        UpdateEventBox();
+                    }));
+                }
+            };
         }
 
         private void BeginRequestEvents(int year)
         {
-            if (eventLoader == null || eventLoader.Status != TaskStatus.Running)
-            {
-                eventLoader = new Task(() => selector.GetEvents(year));
-                eventLoader.ContinueWith(UpdateEventBox, TaskScheduler.FromCurrentSynchronizationContext());
-                eventLoader.Start();
-            }
+            SetProgressVisibility(System.Windows.Visibility.Visible);
+            selector.GetEvents(year);
         }
 
         private void Button_Click(object sender, RoutedEventArgs ev)
@@ -54,11 +70,11 @@ namespace FIRST
             if (int.TryParse(EventYear.Text, out year))
             {
                 Mouse.SetCursor(Cursors.AppStarting);
-        
+                BeginRequestEvents(year);
             }
         }
 
-        private void UpdateEventBox(Task page)
+        private void UpdateEventBox()
         {
             EventsBox.Items.Clear();
             foreach (Event e in selector.events)
@@ -85,6 +101,11 @@ namespace FIRST
             {
                 MessageBox.Show("Please Select an Event");
             }
+        }
+
+        private void SetProgressVisibility(Visibility visible)
+        {
+            DownloadProgress.Dispatcher.Invoke(new Action(() => DownloadProgress.Visibility = visible));
         }
     }
 }

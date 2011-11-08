@@ -19,7 +19,7 @@
                      HorizontalContentAlignment="Left" Text="" Tag="Enter Year"/>
         </StackPanel>
         <Label Content="Event" Grid.Row="2"/>
-        <DockPanel Grid.Row="3">
+        <DockPanel Grid.Row="3" Name="EventDock">
             <Button Content="Reload" DockPanel.Dock="Right" Click="Button_Click"/>
             <ComboBox Name="EventsBox" Margin="0,0,50,0" MinHeight="30" HorizontalContentAlignment="Stretch">
                 <ComboBox.ItemTemplate>
@@ -36,6 +36,7 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
         </DockPanel>
+        <ProgressBar Name="DownloadProgress" Visibility="Hidden" Grid.Row="4" Height="23" VerticalAlignment="Center"/>
         <!-- Notice no row 4, which just provides blank space padding-->
         <Button Content="Cancel" Grid.Row="5" HorizontalAlignment="Left" Width="80" Click="Cancel_Click"/>
         <Button Content="Select" Grid.Row="5" HorizontalAlignment="Right" Width="80" Click="Select_Click"/>

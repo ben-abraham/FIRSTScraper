@@ -9,8 +9,14 @@ using HtmlAgilityPack;
 
 namespace FIRST
 {
+    public delegate void ProgressEventHandler(object sender, UploadProgressChangedEventArgs e);
+    public delegate void EventsUpdatedHandler(object sender, EventArgs e);
+
     class EventLoader
     {
+        public event ProgressEventHandler DownloadProgressChanged;
+        public event EventsUpdatedHandler EventsUpdated;
+
         public string[] EventTypes = new string[] { "Championship",
                                                     "Regional",
                                                     "MI FRC State Championship",
@@ -36,14 +42,36 @@ namespace FIRST
             values.Add("reports", "events");
             values.Add("area", "ALL");
             values.Add("results_size", "250");
+            values.Add("year", "2011");
 
-            
+            client.UploadProgressChanged += new UploadProgressChangedEventHandler(client_UploadProgressChanged);
+            client.UploadValuesCompleted += new UploadValuesCompletedEventHandler(client_UploadValuesCompleted);
+        }
+
+        void client_UploadProgressChanged(object sender, UploadProgressChangedEventArgs e)
+        {
+            if (DownloadProgressChanged != null)
+                DownloadProgressChanged(this, e);
+        }
+
+        void client_UploadValuesCompleted(object sender, UploadValuesCompletedEventArgs e)
+        {
+            ParseResults(e.Result);
+
+            if (EventsUpdated != null)
+                EventsUpdated(this, new EventArgs());
         }
 
         public void GetEvents(int year)
         {
+            values["year"] = year.ToString();
+            client.UploadValuesAsync(new Uri(LassoLocation), values);
+        }
+
+        public void ParseResults(byte[] response)
+        {
             string responseFromServer = "";
-            responseFromServer = Encoding.ASCII.GetString(client.UploadValues(LassoLocation, values));
+            responseFromServer = Encoding.ASCII.GetString(response);
            
             HtmlDocument doc = new HtmlDocument();
             
@@ -74,19 +102,6 @@ namespace FIRST
                     }
                 }
             }
-        }
-    }
-
-    public class Event : Dictionary<string, string>
-    {
-        public string Name { get { return this["Name"]; } }
-        public string Venue { get { return this["Event Venue"]; } }
-        public string Location { get { return this["Location"]; } }
-        public string Date { get { return this["Date"]; } }
-
-        public void LoadEventDetails()
-        {
-
         }
     }
 }

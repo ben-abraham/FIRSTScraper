@@ -16,6 +16,8 @@ namespace FIRST
         public string Location { get { return this["Location"]; } }
         public string Date { get { return this["Date"]; } }
 
+   
+
         public void LoadEventDetails()
         {
             if (client == null)

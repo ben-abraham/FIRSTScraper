@@ -25,5 +25,9 @@ namespace FIRST
                 Console.WriteLine("Table Found with {0} rows", nodes.Count);
             }
         }
+
+        public void Refresh()
+        {
+        }
     }
 }

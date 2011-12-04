@@ -25,6 +25,7 @@
         <Menu Grid.ColumnSpan="2" Grid.Row="0">
             <MenuItem Header="Events">
                 <MenuItem Header="Select Event" Click="MenuItem_Click"/>
+                <MenuItem Header="Test Results" Click="MenuItem_Click_1"/>
             </MenuItem>
             <MenuItem Header="Teams">
                 <MenuItem Header="Team Scraper"/>

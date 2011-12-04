@@ -43,6 +43,16 @@ namespace FIRST
         public event PropertyChangedEventHandler PropertyChanged;
     }
 
+
+
+    /// <summary>
+    ///  US First Loader
+    ///  
+    ///     Important links that we are scrapeing off of
+    ///     https://my.usfirst.org/myarea/index.lasso?page=searchform
+    ///     https://my.usfirst.org/myarea/index.lasso?page=event_details&eid=3749&-session=myarea:C77D64051d5f729EDDNsI1002DFE
+    ///     
+    /// </summary>
     public partial class MainWindow : Window
     {
         Event selectedEvent;
@@ -55,6 +65,9 @@ namespace FIRST
         public double Fade { get { return (double)GetValue(fade_prop); } set { SetValue(fade_prop, value); } }
 
         EventSelector selector = new EventSelector();
+
+
+        
 
         public MainWindow()
         {
@@ -84,16 +97,25 @@ namespace FIRST
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
+            selector.Owner = this;
             bool? result = selector.ShowDialog();
             if (result.Value)
             {
-                selectedEvent = selector.SelectedEvent;
-                selectedEvent.LoadEventDetails();
+                //selectedEvent = selector.SelectedEvent;
+                //selectedEvent.LoadEventDetails();
             }
             else
             {
 
             }
+        }
+
+        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+        {
+            EventResultParser parser = new EventResultParser();
+            EventResults result = parser.ParseLink("blah");
+            ResultViewer viewer = new ResultViewer(result);
+            viewer.ShowDialog();
         }
     }
 }

@@ -28,7 +28,6 @@ namespace FIRST
         public EventSelector()
         {
             InitializeComponent();
-
             selector = new EventLoader();
             EventYear.Text = "" + DateTime.Now.Year;
 
@@ -45,10 +44,12 @@ namespace FIRST
                 if (Visibility == Visibility.Visible)
                     BeginRequestEvents(DateTime.Now.Year);
             };
+
             selector.EventsUpdated += (sender, e) =>
             {
                 if (Visibility == Visibility.Visible)
                 {
+            
                     SetProgressVisibility(System.Windows.Visibility.Hidden);
                     EventsBox.Dispatcher.Invoke(new Action(() =>
                     {

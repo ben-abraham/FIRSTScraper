@@ -1,0 +1,50 @@
+﻿<Window x:Class="FIRST.ResultViewer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ResultViewer" Height="300" Width="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.Resources>
+
+            
+        </Grid.Resources>
+
+        <ListView Name="grid">
+            <ListView.View>
+                <GridView >
+                    <GridViewColumn Header="Time" DisplayMemberBinding="{Binding Time}"/>
+                    <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}"/>
+                    <GridViewColumn Header="Match ID" DisplayMemberBinding="{Binding MatchID}"/>
+                    <GridViewColumn Header="RedTeam1" DisplayMemberBinding = "{Binding RedTeam1ID}"/>
+                    <GridViewColumn Header="RedTeam2" DisplayMemberBinding = "{Binding RedTeam2ID}"/>
+                    <GridViewColumn Header="RedTeam3" DisplayMemberBinding = "{Binding RedTeam3ID}"/>
+                    <GridViewColumn Header="BlueTeam1" DisplayMemberBinding ="{Binding BlueTeam1ID}"/>
+                    <GridViewColumn Header="BlueTeam2" DisplayMemberBinding ="{Binding BlueTeam2ID}"/>
+                    <GridViewColumn Header="BlueTeam3" DisplayMemberBinding ="{Binding BlueTeam3ID}"/>
+                    <GridViewColumn Header="Red Score" DisplayMemberBinding= "{Binding RedScore}"/>
+                    <GridViewColumn Header="Blue Score" DisplayMemberBinding="{Binding BlueScore}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <ListView Name="eliminationGrid" Grid.Row="1">
+            <ListView.View>
+                <GridView  >
+                    <GridViewColumn Header="Time" DisplayMemberBinding="{Binding Time}"/>
+                    <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}"/>
+                    <GridViewColumn Header="Match ID" DisplayMemberBinding="{Binding MatchID}"/>
+                    <GridViewColumn Header="RedTeam1" DisplayMemberBinding = "{Binding RedTeam1ID}"/>
+                    <GridViewColumn Header="RedTeam2" DisplayMemberBinding = "{Binding RedTeam2ID}"/>
+                    <GridViewColumn Header="RedTeam3" DisplayMemberBinding = "{Binding RedTeam3ID}"/>
+                    <GridViewColumn Header="BlueTeam1" DisplayMemberBinding ="{Binding BlueTeam1ID}"/>
+                    <GridViewColumn Header="BlueTeam2" DisplayMemberBinding ="{Binding BlueTeam2ID}"/>
+                    <GridViewColumn Header="BlueTeam3" DisplayMemberBinding ="{Binding BlueTeam3ID}"/>
+                    <GridViewColumn Header="Red Score" DisplayMemberBinding= "{Binding RedScore}"/>
+                    <GridViewColumn Header="Blue Score" DisplayMemberBinding="{Binding BlueScore}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Window>
